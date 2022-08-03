@@ -1,5 +1,68 @@
-type ServiceArea @model @auth(rules: [{allow: public}]) {
+type Scheduling @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Provider: Providers @hasOne
+  can_schedule: Boolean
+  schedule_notes: String
+}
+
+type Insurances @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
-  code: String
 }
+
+type ProviderInsurances @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Provider: Providers @hasOne
+  Insurance: Insurances @hasOne
+}
+
+type ProviderPractices @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Provider: ProviderInsurances @hasOne
+  Practice: Practices @hasOne
+}
+
+type ProviderTypes @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+}
+
+type Genders @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+}
+
+type Credentials @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+}
+
+type Providers @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  first_name: String
+  last_name: String
+  npi: Int
+  Credential: Credentials @hasOne
+  ProviderType: ProviderTypes @hasOne
+  Gender: Genders @hasOne
+}
+
+type Practices @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Market: Markets @hasOne
+  address: String
+  county: String
+  website: AWSURL
+  phone_number: AWSPhone
+  fax: AWSPhone
+  nearby_landmarks: String
+  humana_pcp_number: Int
+}
+
+type Markets @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  state: String
+  city: String
+}
+ 

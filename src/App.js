@@ -1,16 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import { MainFrame } from "./ui-components";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Market Reference Central
-        </p>
-      </header>
+      <MainFrame />
     </div>
   );
 }
 
 export default App;
+
+
+<MainFrame />
