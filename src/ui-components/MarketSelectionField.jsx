@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DataStoreService } from '../services';
 import { Markets } from './models';
 
-export const Markets = () => {
+export const MarketSelectionField = () => {
     const [markets, setMarkets] = useState([]);
     useEffect(() => {
         const markets = DataStoreService.get(Markets);
