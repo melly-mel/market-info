@@ -1,15 +1,13 @@
 import './App.css';
-import { MainFrame } from "./ui-components";
+import '@aws-amplify/ui-react/styles.css';
+import { MarketSelectionField } from './ui-components';
 
 function App() {
   return (
     <div className="App">
-      <MainFrame />
+      <MarketSelectionField />
     </div>
   );
 }
 
 export default App;
-
-
-<MainFrame />
