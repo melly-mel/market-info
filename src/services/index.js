@@ -2,8 +2,7 @@ import { DataStore } from '@aws-amplify/datastore';
 
 export class DataStoreService {
     static async get(dataModel){
-        const models = await DataStore.query(dataModel);
-        console.log(models);
+        return DataStore.query(dataModel);
     }
     static async save(dataModel, args) {
         const newDataModel = new dataModel(args);
