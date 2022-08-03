@@ -41,7 +41,7 @@ type Providers @model @auth(rules: [{allow: public}]) {
   id: ID!
   first_name: String
   last_name: String
-  npi: Float
+  npi: Int
   Credential: Credentials @hasOne
   ProviderType: ProviderTypes @hasOne
   Gender: Genders @hasOne
@@ -57,7 +57,7 @@ type Practices @model @auth(rules: [{allow: public}]) {
   phone_number: AWSPhone
   fax: AWSPhone
   nearby_landmarks: String
-  humana_pcp_number: Float
+  humana_pcp_number: Int
 }
 
 type Markets @model @auth(rules: [{allow: public}]) {

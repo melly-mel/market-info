@@ -114,7 +114,7 @@ export const schema = {
                 "npi": {
                     "name": "npi",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -723,7 +723,7 @@ export const schema = {
                 "humana_pcp_number": {
                     "name": "humana_pcp_number",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -845,5 +845,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "77851db3995b49604119903c32bf43d1"
+    "version": "e37b6e0c04c22056d0b9ebd9fce310ea"
 };
