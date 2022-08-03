@@ -1,5 +1,9 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
+
+
+
+
 type SchedulingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
