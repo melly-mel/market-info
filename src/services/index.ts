@@ -6,13 +6,13 @@ export class DataStoreService {
         console.log(models);
     }
     static async save(dataModel, args) {
-        const newServiceArea = new dataModel(args);
-        await DataStore.save(newServiceArea);
+        const newDataModel = new dataModel(args);
+        await DataStore.save(newDataModel);
     }
-    static async update(dataModel) {
+    static async update(dataModel, dataItem) {
         /* Models in DataStore are immutable. To update a record you must use the copyOf function
  to apply updates to the item’s fields rather than mutating the instance directly */
-        await DataStore.save(dataModel.copyOf(CURRENT_ITEM, item => {
+        await DataStore.save(dataModel.copyOf(dataItem, item => {
             // Update the values on {item} variable to update DataStore entry
         }));
     }
