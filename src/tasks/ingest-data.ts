@@ -1,3 +1,4 @@
+
 import fs from 'fs';
 import csv from 'csv-parser';
 import path from 'path';
@@ -6,7 +7,7 @@ import { Practices, Markets } from '../models/index.js';
 
 const pathToData = path.resolve('src', 'data', 'market-reference-book.csv');
 
-const results = [];
+const results: Object[] = [];
 fs.createReadStream(pathToData)
   .pipe(csv())
   .on('data', (data) => {
@@ -16,7 +17,7 @@ fs.createReadStream(pathToData)
     console.log(market);
     createPractice(market);
   });
-
+// @ts-ignore
 const createPractice = async (args) => {
   const market = new Markets({
     "state": "AZ",
@@ -37,7 +38,7 @@ const createPractice = async (args) => {
   );
 };
 
-const translatePhoneNumber = (val) => {
+const translatePhoneNumber = (val: string) => {
   const numbers = val.split('-');
   return `(${numbers[0]}) ${numbers[1]}-${numbers[2]}`
 }

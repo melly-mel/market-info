@@ -4,6 +4,10 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+type InsurancePlansMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type SchedulingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -42,6 +46,18 @@ type PracticesMetaData = {
 
 type MarketsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class InsurancePlans {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly type?: string | null;
+  readonly code?: string | null;
+  readonly insurancesID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<InsurancePlans, InsurancePlansMetaData>);
+  static copyOf(source: InsurancePlans, mutator: (draft: MutableModel<InsurancePlans, InsurancePlansMetaData>) => MutableModel<InsurancePlans, InsurancePlansMetaData> | void): InsurancePlans;
 }
 
 export declare class Scheduling {
@@ -103,6 +119,7 @@ export declare class Genders {
 export declare class Insurances {
   readonly id: string;
   readonly name?: string | null;
+  readonly InsurancePlan?: (InsurancePlans | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Insurances, InsurancesMetaData>);
