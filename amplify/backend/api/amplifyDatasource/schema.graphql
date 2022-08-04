@@ -1,3 +1,11 @@
+type InsurancePlans @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  type: String
+  code: String
+  insurancesID: ID! @index(name: "byInsurances")
+}
+
 type Scheduling @model @auth(rules: [{allow: public}]) {
   id: ID!
   Provider: Providers @hasOne
@@ -8,6 +16,7 @@ type Scheduling @model @auth(rules: [{allow: public}]) {
 type Insurances @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
+  InsurancePlan: [InsurancePlans] @hasMany(indexName: "byInsurances", fields: ["id"])
 }
 
 type ProviderInsurances @model @auth(rules: [{allow: public}]) {
