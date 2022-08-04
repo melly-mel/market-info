@@ -2,6 +2,7 @@
 
 # project
 src/data
+aws-exports.ts
 
 # dependencies
 /node_modules
@@ -35,7 +36,6 @@ amplify/backend/.temp
 build/
 dist/
 node_modules/
-aws-exports.ts
 aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
