@@ -1,6 +1,6 @@
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
-import { MarketSelectionField } from './ui-components';
+import { MarketSelectionField } from './components';
 
 function App() {
   return (
