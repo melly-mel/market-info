@@ -10,7 +10,7 @@ interface DropdownProp {
 
 export const Dropdown = ({ label, selections, valueKey, displayKey }: DropdownProp) => {
     return (
-        <SelectField label={label} className="dropdown-container">
+        <SelectField label={label}>
             {selections.map((selection, index) =>
                 <option key={index} value={selection[valueKey]}>{selection[displayKey]}</option>
             )}
