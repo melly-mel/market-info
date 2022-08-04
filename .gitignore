@@ -2,6 +2,7 @@
 
 # project
 src/data
+aws-exports.ts
 
 # dependencies
 /node_modules
