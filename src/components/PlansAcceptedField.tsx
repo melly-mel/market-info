@@ -8,7 +8,6 @@ export const PlansAcceptedField = () => {
     useEffect(() => {
         async function fetchMarkets() {
             const plans = await DataStoreService.getAll(InsurancePlans);
-            console.log(plans);
             setPlans(plans);
         }
         fetchMarkets();

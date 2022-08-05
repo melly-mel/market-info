@@ -8,7 +8,6 @@ export const MarketSelectionField = () => {
     useEffect(() => {
         async function fetchMarkets() {
             const markets = await DataStoreService.getAll(Markets);
-            console.log(markets);
             setMarkets(markets);
         }
         fetchMarkets();

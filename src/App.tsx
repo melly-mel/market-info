@@ -1,6 +1,6 @@
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
-import { MarketSelectionField, InsuranceSelectionField, PlansAcceptedField } from './components';
+import { MarketSelectionField, InsuranceSelectionField, PlansAcceptedField, PracticeSection } from './components';
 import { Divider, View } from '@aws-amplify/ui-react';
 
 function App() {
@@ -12,6 +12,9 @@ function App() {
         <PlansAcceptedField />
       </View>
       <Divider orientation="horizontal" />
+      <View className="section-container">
+        <PracticeSection />
+      </View>
     </View>
   );
 }
