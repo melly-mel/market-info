@@ -27,8 +27,8 @@ export const InsuranceSection = () => {
     }, []);
     return (
         <Flex>
-            <Dropdown label='Market' selections={markets} valueKey='state' displayKey='state' />
-            <Dropdown label='Insurance Provider' selections={insurances} valueKey='name' displayKey='name' />
+            <Dropdown label='Market' placeHolder='Select a market' selections={markets} valueKey='state' displayKey='state' />
+            <Dropdown label='Insurance Provider' placeHolder='Select an insurance' selections={insurances} valueKey='name' displayKey='name' />
             <View>
                 <Text>Plans Accepted</Text>
                 <Collection

@@ -17,7 +17,7 @@ export const PracticeSection = () => {
     }, []);
     return (
         <View>
-            <Dropdown label='Practice' selections={practices} valueKey='name' displayKey='name' />
+            <Dropdown label='Practice' placeHolder='Select a practice' selections={practices} valueKey='name' displayKey='name' />
             <Flex>
                 <TextField label="Phone Number" value={"N/A"} isDisabled/>
                 <TextField label="FaxNumber" value={"N/A"} isDisabled/>

@@ -17,7 +17,7 @@ export const ProviderSection = () => {
     }, []);
     return (
         <View>
-            <Dropdown label='Provider Name' selections={providers} valueKey='first_name' displayKey='first_name' />
+            <Dropdown label='Provider' placeHolder='Select a provider' selections={providers} valueKey='first_name' displayKey='first_name' />
             <Flex>
                 <TextField label="Credential" value={"N/A"} isDisabled/>
                 <TextField label="Languages Spoken" value={"N/A"} isDisabled/>
