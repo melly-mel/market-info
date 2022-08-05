@@ -1,4 +1,5 @@
 .amplify-selectfield {
     width: 258px;
     text-align: left;
+    display: block;
 }
