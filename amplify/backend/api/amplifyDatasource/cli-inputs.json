@@ -4,9 +4,8 @@
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 30,
-      "apiKeyExpirationDate": "2022-09-04T22:17:12.097Z",
-      "keyDescription": "api key description"
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {
@@ -18,7 +17,6 @@
       {
         "mode": "AWS_IAM"
       }
-    ],
-    "gqlSchemaPath": "/Users/mcanela/Repositories/market-info-project/amplify/backend/api/amplifyDatasource/schema.graphql"
+    ]
   }
 }

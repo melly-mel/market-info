@@ -1,10 +1,12 @@
 import { useEffect, useReducer, useState } from 'react';
 import { DataStoreService } from '../../services/index';
-import { InsurancePlans, Insurances, Markets } from '../../models';
+import { InsurancePlans, InsurancesMarkets, Markets } from '../../models';
 import { Dropdown } from '../base/Dropdown';
 import { Collection, Flex, View, Text } from '@aws-amplify/ui-react';
 import { initialMarketState, marketReducer, intialInsuranceState, insuranceReducer } from './reducer';
 import { loadInsurances, loadMarkets, setSelectedMarket } from './actions';
+import { Insurances } from '../../models';
+import { Predicates } from 'aws-amplify';
 
 export const InsuranceSection = () => {
     const [marketState, dispatchMarketAction] = useReducer(marketReducer, initialMarketState);
@@ -13,15 +15,21 @@ export const InsuranceSection = () => {
     useEffect(() => {
         async function fetchMarkets() {
             const markets = await DataStoreService.getAll(Markets);
+            console.log(markets)
             loadMarkets(dispatchMarketAction, markets);
         }
         fetchMarkets();
     }, []);
     useEffect(() => {
         async function fetchInsurances() {
-            const insurances = await DataStoreService.get(Insurances, marketState.selectedId);
-            console.log(insurances)
-            loadInsurances(dispatchInsuranceAction, [insurances]);
+            if (marketState.selectedId) {
+                const insurMarkets = await DataStoreService.query(InsurancesMarkets);
+                const insurances = insurMarkets
+                    .filter((insurMarket) => insurMarket.markets.id === marketState.selectedId)
+                    .map((insurMarket) => insurMarket.insurances);
+                console.log(insurances)
+                loadInsurances(dispatchInsuranceAction, insurances);
+            }
         }
         fetchInsurances();
     }, [marketState.selectedId])

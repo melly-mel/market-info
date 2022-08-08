@@ -32,6 +32,10 @@ type InsurancesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type MarketsMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type ProviderInsurancesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -44,7 +48,7 @@ type PracticesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type MarketsMetaData = {
+type InsurancesMarketsMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -120,10 +124,22 @@ export declare class Insurances {
   readonly id: string;
   readonly name?: string | null;
   readonly InsurancePlan?: (InsurancePlans | null)[] | null;
+  readonly Markets?: (InsurancesMarkets | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Insurances, InsurancesMetaData>);
   static copyOf(source: Insurances, mutator: (draft: MutableModel<Insurances, InsurancesMetaData>) => MutableModel<Insurances, InsurancesMetaData> | void): Insurances;
+}
+
+export declare class Markets {
+  readonly id: string;
+  readonly state?: string | null;
+  readonly city?: string | null;
+  readonly insurancess?: (InsurancesMarkets | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Markets, MarketsMetaData>);
+  static copyOf(source: Markets, mutator: (draft: MutableModel<Markets, MarketsMetaData>) => MutableModel<Markets, MarketsMetaData> | void): Markets;
 }
 
 export declare class ProviderInsurances {
@@ -168,12 +184,12 @@ export declare class Practices {
   static copyOf(source: Practices, mutator: (draft: MutableModel<Practices, PracticesMetaData>) => MutableModel<Practices, PracticesMetaData> | void): Practices;
 }
 
-export declare class Markets {
+export declare class InsurancesMarkets {
   readonly id: string;
-  readonly state?: string | null;
-  readonly city?: string | null;
+  readonly insurances: Insurances;
+  readonly markets: Markets;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Markets, MarketsMetaData>);
-  static copyOf(source: Markets, mutator: (draft: MutableModel<Markets, MarketsMetaData>) => MutableModel<Markets, MarketsMetaData> | void): Markets;
+  constructor(init: ModelInit<InsurancesMarkets, InsurancesMarketsMetaData>);
+  static copyOf(source: InsurancesMarkets, mutator: (draft: MutableModel<InsurancesMarkets, InsurancesMarketsMetaData>) => MutableModel<InsurancesMarkets, InsurancesMarketsMetaData> | void): InsurancesMarkets;
 }

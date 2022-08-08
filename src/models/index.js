@@ -4,7 +4,7 @@ import { schema } from './schema';
 
 
 
-const { InsurancePlans, Scheduling, Providers, Credentials, ProviderTypes, Genders, Insurances, ProviderInsurances, ProviderPractices, Practices, Markets } = initSchema(schema);
+const { InsurancePlans, Scheduling, Providers, Credentials, ProviderTypes, Genders, Insurances, Markets, ProviderInsurances, ProviderPractices, Practices, InsurancesMarkets } = initSchema(schema);
 
 export {
   InsurancePlans,
@@ -14,8 +14,9 @@ export {
   ProviderTypes,
   Genders,
   Insurances,
+  Markets,
   ProviderInsurances,
   ProviderPractices,
   Practices,
-  Markets
+  InsurancesMarkets
 };
