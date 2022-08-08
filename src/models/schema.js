@@ -520,6 +520,20 @@ export const schema = {
                         "associatedWith": "insurancesID"
                     }
                 },
+                "Markets": {
+                    "name": "Markets",
+                    "isArray": true,
+                    "type": {
+                        "model": "InsurancesMarkets"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "insurances"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -539,6 +553,86 @@ export const schema = {
             },
             "syncable": true,
             "pluralName": "Insurances",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Markets": {
+            "name": "Markets",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "state": {
+                    "name": "state",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "insurancess": {
+                    "name": "insurancess",
+                    "isArray": true,
+                    "type": {
+                        "model": "InsurancesMarkets"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "markets"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Markets",
             "attributes": [
                 {
                     "type": "model",
@@ -879,8 +973,8 @@ export const schema = {
                 }
             ]
         },
-        "Markets": {
-            "name": "Markets",
+        "InsurancesMarkets": {
+            "name": "InsurancesMarkets",
             "fields": {
                 "id": {
                     "name": "id",
@@ -889,19 +983,31 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "state": {
-                    "name": "state",
+                "insurances": {
+                    "name": "insurances",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
+                    "type": {
+                        "model": "Insurances"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "insurancesID"
+                    }
                 },
-                "city": {
-                    "name": "city",
+                "markets": {
+                    "name": "markets",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
+                    "type": {
+                        "model": "Markets"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "marketsID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -921,25 +1027,27 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Markets",
+            "pluralName": "InsurancesMarkets",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "auth",
+                    "type": "key",
                     "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
+                        "name": "byInsurances",
+                        "fields": [
+                            "insurancesID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byMarkets",
+                        "fields": [
+                            "marketsID"
                         ]
                     }
                 }
@@ -948,5 +1056,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "b2e961c4eb16fcbbd6d5a4bd9df730cd"
+    "version": "2e2da67a9701e6d7d2eab3036b0954e5"
 };

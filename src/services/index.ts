@@ -1,4 +1,4 @@
-import { DataStore, MutableModel, PersistentModel, PersistentModelConstructor } from '@aws-amplify/datastore';
+import { DataStore, MutableModel, PersistentModel, PersistentModelConstructor, ProducerModelPredicate } from '@aws-amplify/datastore';
 
 export class DataStoreService {
     static async get<T extends PersistentModel>(dataModel: PersistentModelConstructor<T>, id?: string) {
@@ -6,6 +6,9 @@ export class DataStoreService {
     }
     static async getAll<T extends PersistentModel>(dataModel: PersistentModelConstructor<T>) {
         return DataStore.query(dataModel);
+    }
+    static async query<T extends PersistentModel>(dataModel: PersistentModelConstructor<T>, criteria?: ProducerModelPredicate<T>) {
+        return DataStore.query(dataModel, criteria);
     }
     static async save<T extends PersistentModel>(dataModel: T) {
         await DataStore.save(dataModel);
