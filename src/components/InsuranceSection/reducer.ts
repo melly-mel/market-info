@@ -1,37 +1,54 @@
-import { Markets } from "../../models";
+import { Insurances, Markets } from "../../models";
 
-export enum InsuranceSectionActionType {
+export enum ActionType {
     LOAD, SET
 }
 
-export interface InsuranceSectionAction {
-    type: InsuranceSectionActionType;
-    markets?: Markets[];
-    marketId?: string;
+export interface Action<T extends { id?: string }> {
+    type: ActionType;
+    items?: T[];
+    id?: string;
 }
 
-export interface InsuranceSectionState {
-    markets: Markets[];
-    selectedMarket: string;
-}
+export interface State<T extends { id?: string }> {
+    items: T[];
+    selectedId: string;
+};
 
-export const initialState: InsuranceSectionState = { markets: [], selectedMarket: null };
-
-export const reducer = (state: InsuranceSectionState, action: InsuranceSectionAction) => {
+const reducer = <T extends { id?: string }>(state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
-        case InsuranceSectionActionType.LOAD:
+        case ActionType.LOAD:
             return {
                 ...state,
-                markets: action.markets,
+                items: action.items,
             }
-        case InsuranceSectionActionType.SET:
-            const selectedMarket = state.markets.find((market) => market.id === action.marketId)
+        case ActionType.SET:
+            const selectedMarket = state.items.find((item) => item.id === action.id)
             return {
                 ...state,
-                selectedMarket: selectedMarket.id,
+                selectedId: selectedMarket.id,
             }
         default:
             throw new Error();
     }
-
 }
+
+export type MarketAction = Action<Markets>;
+export type MarketState = State<Markets>;
+
+export const initialMarketState: MarketState = {
+    items: [],
+    selectedId: null
+};
+
+export const marketReducer = (state: MarketState, action: MarketAction) => reducer<Markets>(state, action);
+
+export type InsuranceState = State<Insurances>;
+export type InsuranceAction = Action<Insurances>;
+
+export const intialInsuranceState: InsuranceState = {
+    items: [],
+    selectedId: null
+};
+
+export const insuranceReducer = (state: InsuranceState, action: InsuranceAction) => reducer<Insurances>(state, action);

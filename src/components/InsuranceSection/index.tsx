@@ -3,46 +3,53 @@ import { DataStoreService } from '../../services/index';
 import { InsurancePlans, Insurances, Markets } from '../../models';
 import { Dropdown } from '../base/Dropdown';
 import { Collection, Flex, View, Text } from '@aws-amplify/ui-react';
-import { initialState, reducer } from './reducer';
-import { loadMarkets, setSelectedMarket } from './actions';
+import { initialMarketState, marketReducer, intialInsuranceState, insuranceReducer } from './reducer';
+import { loadInsurances, loadMarkets, setSelectedMarket } from './actions';
 
 export const InsuranceSection = () => {
-    const [marketState, dispatchMarketAction] = useReducer(reducer, initialState);
-    const [insurances, setInsurances] = useState([]);
+    const [marketState, dispatchMarketAction] = useReducer(marketReducer, initialMarketState);
+    const [insuranceState, dispatchInsuranceAction] = useReducer(insuranceReducer, intialInsuranceState);
     const [plans, setPlans] = useState([]);
     useEffect(() => {
         async function fetchMarkets() {
             const markets = await DataStoreService.getAll(Markets);
             loadMarkets(dispatchMarketAction, markets);
         }
+        fetchMarkets();
+    }, []);
+    useEffect(() => {
         async function fetchInsurances() {
-            const insurances = await DataStoreService.getAll(Insurances);
-            setInsurances(insurances);
+            const insurances = await DataStoreService.get(Insurances, marketState.selectedId);
+            console.log(insurances)
+            loadInsurances(dispatchInsuranceAction, [insurances]);
         }
+        fetchInsurances();
+    }, [marketState.selectedId])
+    useEffect(() => {
         async function fetchInsurancePlans() {
             const plans = await DataStoreService.getAll(InsurancePlans);
             setPlans(plans);
         }
-        fetchMarkets();
-        fetchInsurances();
         fetchInsurancePlans();
-    }, []);
+    }, [insuranceState])
     return (
         <Flex>
             <Dropdown
                 label='Market'
                 placeHolder='Select a market'
-                selections={marketState.markets} 
-                valueKey='id' 
+                selections={marketState.items}
+                valueKey='id'
                 displayKey='state'
-                value={marketState.selectedMarket}
-                onChange={(e) => setSelectedMarket(dispatchMarketAction, e.target.value)}/>
-            <Dropdown 
-                label='Insurance Provider' 
+                value={marketState.selectedId}
+                onChange={(e) => setSelectedMarket(dispatchMarketAction, e.target.value)} />
+            <Dropdown
+                label='Insurance Provider'
                 placeHolder='Select an insurance'
-                selections={insurances}
-                valueKey='id' 
-                displayKey='name'/>
+                selections={insuranceState.items}
+                valueKey='id'
+                displayKey='name'
+                value={insuranceState.selectedId}
+                onChange={(e) => setSelectedMarket(dispatchInsuranceAction, e.target.value)} />
             <View>
                 <Text>Plans Accepted</Text>
                 <Collection

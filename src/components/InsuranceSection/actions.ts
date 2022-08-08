@@ -1,16 +1,24 @@
-import { Markets } from "../../models";
-import { InsuranceSectionAction, InsuranceSectionActionType } from "./reducer";
+import { Insurances, Markets } from "../../models";
+import { ActionType, InsuranceAction } from "./reducer";
+import { MarketAction } from "./reducer";
 
-export const loadMarkets = (dispatch: React.Dispatch<InsuranceSectionAction>, markets: Markets[]) => {
+export const loadMarkets = (dispatch: React.Dispatch<MarketAction>, markets: Markets[]) => {
     dispatch({
-        type: InsuranceSectionActionType.LOAD,
-        markets: markets,
+        type: ActionType.LOAD,
+        items: markets,
     });
 }
 
-export const setSelectedMarket = (dispatch: React.Dispatch<InsuranceSectionAction>, value: string) => {
+export const setSelectedMarket = (dispatch: React.Dispatch<MarketAction>, value: string) => {
     dispatch({
-        type: InsuranceSectionActionType.SET,
-        marketId: value
+        type: ActionType.SET,
+        id: value
+    })
+}
+
+export const loadInsurances = (dispatch: React.Dispatch<InsuranceAction>, insurances: Insurances[]) => {
+    dispatch({
+        type: ActionType.LOAD,
+        items: insurances
     })
 }
