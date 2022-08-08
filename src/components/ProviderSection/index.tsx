@@ -10,7 +10,6 @@ export const ProviderSection = () => {
     useEffect(() => {
         async function fetchMarkets() {
             const providers = await DataStoreService.getAll(Providers);
-            console.log(providers);
             setProviders(providers);
         }
         fetchMarkets();

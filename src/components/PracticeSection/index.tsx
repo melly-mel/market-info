@@ -10,7 +10,6 @@ export const PracticeSection = () => {
     useEffect(() => {
         async function fetchMarkets() {
             const practices = await DataStoreService.getAll(Practices);
-            console.log(practices);
             setPractices(practices);
         }
         fetchMarkets();

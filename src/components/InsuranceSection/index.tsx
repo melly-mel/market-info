@@ -5,8 +5,6 @@ import { Dropdown } from '../base/Dropdown';
 import { Collection, Flex, View, Text } from '@aws-amplify/ui-react';
 import { initialMarketState, marketReducer, intialInsuranceState, insuranceReducer } from './reducer';
 import { loadInsurances, loadMarkets, setSelectedMarket } from './actions';
-import { Insurances } from '../../models';
-import { Predicates } from 'aws-amplify';
 
 export const InsuranceSection = () => {
     const [marketState, dispatchMarketAction] = useReducer(marketReducer, initialMarketState);
@@ -15,7 +13,6 @@ export const InsuranceSection = () => {
     useEffect(() => {
         async function fetchMarkets() {
             const markets = await DataStoreService.getAll(Markets);
-            console.log(markets)
             loadMarkets(dispatchMarketAction, markets);
         }
         fetchMarkets();
@@ -27,19 +24,26 @@ export const InsuranceSection = () => {
                 const insurances = insurMarkets
                     .filter((insurMarket) => insurMarket.markets.id === marketState.selectedId)
                     .map((insurMarket) => insurMarket.insurances);
-                console.log(insurances)
                 loadInsurances(dispatchInsuranceAction, insurances);
+            } else {
+                loadInsurances(dispatchInsuranceAction, []);
             }
         }
         fetchInsurances();
     }, [marketState.selectedId])
     useEffect(() => {
         async function fetchInsurancePlans() {
-            const plans = await DataStoreService.getAll(InsurancePlans);
-            setPlans(plans);
+            if (insuranceState.selectedId){
+                console.log(insuranceState.selectedId)
+                const plans = await DataStoreService.query(InsurancePlans, insurancePlan => insurancePlan.insurancesID('eq', insuranceState.selectedId));
+                console.log(plans);
+                setPlans(plans);
+            } else {
+                setPlans([]);
+            }
         }
         fetchInsurancePlans();
-    }, [insuranceState])
+    }, [insuranceState.selectedId])
     return (
         <Flex>
             <Dropdown
