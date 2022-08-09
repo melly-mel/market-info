@@ -9,7 +9,7 @@ export const loadMarkets = (dispatch: React.Dispatch<MarketAction>, markets: Mar
     });
 }
 
-export const setSelectedMarket = (dispatch: React.Dispatch<MarketAction>, value: string) => {
+export const setSelectedId = (dispatch: React.Dispatch<MarketAction>, value: string) => {
     dispatch({
         type: ActionType.SET,
         id: value
