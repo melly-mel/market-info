@@ -26,15 +26,15 @@ const reducer = <T extends { id?: string }>(state: State<T>, action: Action<T>):
             const selectedMarket = state.items.find((item) => item.id === action.id)
             return {
                 ...state,
-                selectedId: selectedMarket.id,
+                selectedId: selectedMarket?.id,
             }
         default:
             throw new Error();
     }
 }
 
-export type MarketAction = Action<Markets>;
 export type MarketState = State<Markets>;
+export type MarketAction = Action<Markets>;
 
 export const initialMarketState: MarketState = {
     items: [],
