@@ -10,6 +10,13 @@
       "StackName": "amplify-marketinfo-staging-212945",
       "StackId": "arn:aws:cloudformation:us-east-1:193567999519:stack/amplify-marketinfo-staging-212945/1209e7e0-0d2a-11ed-894e-0e4126ae63c3",
       "AmplifyAppId": "d36gdehh8q65oo"
+    },
+    "categories": {
+      "function": {
+        "marketCentralAddressFetcher": {
+          "secretsPathAmplifyAppId": "d36gdehh8q65oo"
+        }
+      }
     }
   }
 }
