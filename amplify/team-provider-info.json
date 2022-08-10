@@ -14,7 +14,9 @@
     "categories": {
       "function": {
         "marketCentralAddressFetcher": {
-          "secretsPathAmplifyAppId": "d36gdehh8q65oo"
+          "secretsPathAmplifyAppId": "d36gdehh8q65oo",
+          "deploymentBucketName": "amplify-marketinfo-staging-212945-deployment",
+          "s3Key": "amplify-builds/marketCentralAddressFetcher-446d354357456b485238-build.zip"
         }
       }
     }
