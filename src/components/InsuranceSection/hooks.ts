@@ -21,10 +21,10 @@ export const useInsuranceReducer: (selectedMarketId: string) => [InsuranceState,
     useEffect(() => {
         async function fetchInsurances() {
             if (selectedMarketId) {
-                const insurMarkets = await DataStoreService.query(InsurancesMarkets);
-                const insurances = insurMarkets
-                    .filter((insurMarket) => insurMarket.markets.id === selectedMarketId)
-                    .map((insurMarket) => insurMarket.insurances);
+                const insuranceMarkets = await DataStoreService.query(InsurancesMarkets);
+                const insurances = insuranceMarkets
+                    .filter((insuranceMarket) => insuranceMarket.markets.id === selectedMarketId)
+                    .map((insuranceMarket) => insuranceMarket.insurances);
                 loadItems(dispatchInsuranceAction, insurances);
             } else {
                 loadItems(dispatchInsuranceAction, []);

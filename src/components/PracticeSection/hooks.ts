@@ -9,7 +9,7 @@ export const usePracticeReducer: (selectedMarketId: string) => [PracticeState, R
     useEffect(() => {
         async function fetchPractices() {
             if (selectedMarketId){
-                const practices = await DataStoreService.query(Practices, practices => practices.practicesMarketId('eq', selectedMarketId));
+                const practices = await DataStoreService.query(Practices, practice => practice.practicesMarketId('eq', selectedMarketId));
                 loadItems(dispatchPracticeAction, practices);
             }
         }

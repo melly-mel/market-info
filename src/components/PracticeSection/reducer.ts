@@ -1,5 +1,5 @@
 import { Practices } from "../../models";
-import { Action, reducer, State } from "../InsuranceSection/reducer";
+import { Action, reducer, State } from "../base/reducer";
 
 export type PracticeState = State<Practices>;
 export type PracticeAction = Action<Practices>;
