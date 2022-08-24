@@ -88,7 +88,7 @@ export declare class Providers {
   readonly Credential?: Credentials | null;
   readonly ProviderType?: ProviderTypes | null;
   readonly Gender?: Genders | null;
-  readonly Practices?: (ProvidersPractices | null)[] | null;
+  readonly practicess?: (ProvidersPractices | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly providersCredentialId?: string | null;
@@ -159,7 +159,7 @@ export declare class Insurances {
   readonly id: string;
   readonly name?: string | null;
   readonly InsurancePlan?: (InsurancePlans | null)[] | null;
-  readonly Markets?: (InsurancesMarkets | null)[] | null;
+  readonly marketss?: (InsurancesMarkets | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Insurances, InsurancesMetaData>);

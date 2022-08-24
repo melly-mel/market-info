@@ -249,8 +249,8 @@ export const schema = {
                         "targetName": "providersGenderId"
                     }
                 },
-                "Practices": {
-                    "name": "Practices",
+                "practicess": {
+                    "name": "practicess",
                     "isArray": true,
                     "type": {
                         "model": "ProvidersPractices"
@@ -757,8 +757,8 @@ export const schema = {
                         "associatedWith": "insurancesID"
                     }
                 },
-                "Markets": {
-                    "name": "Markets",
+                "marketss": {
+                    "name": "marketss",
                     "isArray": true,
                     "type": {
                         "model": "InsurancesMarkets"
@@ -1164,5 +1164,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "50678a4c65650f49f9f5171d8612a09d"
+    "version": "713e8ed81844206b5025acc993a108a0"
 };

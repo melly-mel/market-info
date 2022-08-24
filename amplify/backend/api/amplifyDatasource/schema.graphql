@@ -17,7 +17,7 @@ type Insurances @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   InsurancePlan: [InsurancePlans] @hasMany(indexName: "byInsurances", fields: ["id"])
-  Markets: [Markets] @manyToMany(relationName: "InsurancesMarkets")
+  marketss: [Markets] @manyToMany(relationName: "InsurancesMarkets")
 }
 
 type ProviderInsurances @model @auth(rules: [{allow: public}]) {
@@ -55,7 +55,7 @@ type Providers @model @auth(rules: [{allow: public}]) {
   Credential: Credentials @hasOne
   ProviderType: ProviderTypes @hasOne
   Gender: Genders @hasOne
-  Practices: [Practices] @manyToMany(relationName: "ProvidersPractices")
+  practicess: [Practices] @manyToMany(relationName: "ProvidersPractices")
 }
 
 type Practices @model @auth(rules: [{allow: public}]) {

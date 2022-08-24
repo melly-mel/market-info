@@ -1,14 +1,13 @@
 import { Dropdown } from '../base/Dropdown';
 import { Flex, TextField, View } from '@aws-amplify/ui-react';
-import { usePracticeReducer } from './hooks';
-import { setSelectedId } from '../base/actions';
+import { PracticeState } from './reducer';
 
 interface PracticeSectionProps {
-    selectedMarket: string;
+    practices: PracticeState;
+    onPracticeChange: (practiceId: string) => void;
 }
 
-export const PracticeSection: React.VFC<PracticeSectionProps> = ({selectedMarket}) => {
-    const [practices, dispatchPracticeAction] = usePracticeReducer(selectedMarket);
+export const PracticeSection: React.VFC<PracticeSectionProps> = ({practices, onPracticeChange}) => {
     const selectedPractice = practices.items.find((item) => item.id === practices.selectedId)
     return (
         <View>
@@ -19,7 +18,7 @@ export const PracticeSection: React.VFC<PracticeSectionProps> = ({selectedMarket
                 valueKey='id'
                 displayKey='name' 
                 value={practices.selectedId}
-                onChange={(e) => setSelectedId(dispatchPracticeAction, e.target.value)}/>
+                onChange={(e) => onPracticeChange(e.target.value)}/>
             <Flex>
                 <TextField label="Phone Number" value={selectedPractice?.phone_number ?? 'N/A'} isDisabled/>
                 <TextField label="FaxNumber" value={selectedPractice?.fax ?? 'N/A'} isDisabled/>
