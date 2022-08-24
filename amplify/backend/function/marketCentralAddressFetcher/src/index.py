@@ -5,8 +5,8 @@ import boto3
 from botocore.exceptions import ClientError
 
 def get_secret():
+    secret_name = os.environ["google_places_api_key"]
     region_name = "us-east-1"
-
     session = boto3.session.Session()
     client = session.client(
         service_name='secretsmanager',
@@ -32,20 +32,17 @@ def get_secret():
         # Secrets Manager decrypts the secret value using the associated KMS CMK
         # Depending on whether the secret was a string or binary, only one of these fields will be populated
         if 'SecretString' in get_secret_value_response:
-            text_secret_data = get_secret_value_response['SecretString']
+            return get_secret_value_response['SecretString']
         else:
-            binary_secret_data = get_secret_value_response['SecretBinary']
+            return get_secret_value_response['SecretBinary']
 
-        # Your code goes here.
-
-secret_name = os.environ["google_places_api_key"]
-print(get_secret())
-# gmaps = googlemaps.Client(key=os.environ["google_places_api_key"])
+google_api_key = get_secret()
+gmaps = googlemaps.Client(key=google_api_key)
 
 def handler(event, context):
   print('received event:')
   print(event)
-  
+  gmaps.places_autocomplete("61 Locust ST")
   return {
       'statusCode': 200,
       'headers': {

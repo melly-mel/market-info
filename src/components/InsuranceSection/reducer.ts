@@ -15,7 +15,7 @@ export interface State<T extends { id?: string }> {
     selectedId: string;
 };
 
-const reducer = <T extends { id?: string }>(state: State<T>, action: Action<T>): State<T> => {
+export const reducer = <T extends { id?: string }>(state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
         case ActionType.LOAD:
             return {
