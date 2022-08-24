@@ -17,19 +17,13 @@ type Insurances @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   InsurancePlan: [InsurancePlans] @hasMany(indexName: "byInsurances", fields: ["id"])
-  Markets: [Markets] @manyToMany(relationName: "InsurancesMarkets")
+  marketss: [Markets] @manyToMany(relationName: "InsurancesMarkets")
 }
 
 type ProviderInsurances @model @auth(rules: [{allow: public}]) {
   id: ID!
   Provider: Providers @hasOne
   Insurance: Insurances @hasOne
-}
-
-type ProviderPractices @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Provider: ProviderInsurances @hasOne
-  Practice: Practices @hasOne
 }
 
 type ProviderTypes @model @auth(rules: [{allow: public}]) {
@@ -55,6 +49,7 @@ type Providers @model @auth(rules: [{allow: public}]) {
   Credential: Credentials @hasOne
   ProviderType: ProviderTypes @hasOne
   Gender: Genders @hasOne
+  practicess: [Practices] @manyToMany(relationName: "ProvidersPractices")
 }
 
 type Practices @model @auth(rules: [{allow: public}]) {
@@ -68,6 +63,7 @@ type Practices @model @auth(rules: [{allow: public}]) {
   fax: AWSPhone
   nearby_landmarks: String
   humana_pcp_number: Int
+  providerss: [Providers] @manyToMany(relationName: "ProvidersPractices")
 }
 
 type Markets @model @auth(rules: [{allow: public}]) {

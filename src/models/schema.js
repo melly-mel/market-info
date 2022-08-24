@@ -249,6 +249,20 @@ export const schema = {
                         "targetName": "providersGenderId"
                     }
                 },
+                "practicess": {
+                    "name": "practicess",
+                    "isArray": true,
+                    "type": {
+                        "model": "ProvidersPractices"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "providers"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -489,8 +503,8 @@ export const schema = {
                 }
             ]
         },
-        "Insurances": {
-            "name": "Insurances",
+        "Practices": {
+            "name": "Practices",
             "fields": {
                 "id": {
                     "name": "id",
@@ -506,32 +520,81 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "InsurancePlan": {
-                    "name": "InsurancePlan",
-                    "isArray": true,
+                "Market": {
+                    "name": "Market",
+                    "isArray": false,
                     "type": {
-                        "model": "InsurancePlans"
+                        "model": "Markets"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "insurancesID"
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "practicesMarketId"
                     }
                 },
-                "Markets": {
-                    "name": "Markets",
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "county": {
+                    "name": "county",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "website": {
+                    "name": "website",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "phone_number": {
+                    "name": "phone_number",
+                    "isArray": false,
+                    "type": "AWSPhone",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "fax": {
+                    "name": "fax",
+                    "isArray": false,
+                    "type": "AWSPhone",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "nearby_landmarks": {
+                    "name": "nearby_landmarks",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "humana_pcp_number": {
+                    "name": "humana_pcp_number",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "providerss": {
+                    "name": "providerss",
                     "isArray": true,
                     "type": {
-                        "model": "InsurancesMarkets"
+                        "model": "ProvidersPractices"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "insurances"
+                        "associatedWith": "practices"
                     }
                 },
                 "createdAt": {
@@ -549,10 +612,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "practicesMarketId": {
+                    "name": "practicesMarketId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Insurances",
+            "pluralName": "Practices",
             "attributes": [
                 {
                     "type": "model",
@@ -633,6 +703,93 @@ export const schema = {
             },
             "syncable": true,
             "pluralName": "Markets",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Insurances": {
+            "name": "Insurances",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "InsurancePlan": {
+                    "name": "InsurancePlan",
+                    "isArray": true,
+                    "type": {
+                        "model": "InsurancePlans"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "insurancesID"
+                    }
+                },
+                "marketss": {
+                    "name": "marketss",
+                    "isArray": true,
+                    "type": {
+                        "model": "InsurancesMarkets"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "insurances"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Insurances",
             "attributes": [
                 {
                     "type": "model",
@@ -750,8 +907,8 @@ export const schema = {
                 }
             ]
         },
-        "ProviderPractices": {
-            "name": "ProviderPractices",
+        "ProvidersPractices": {
+            "name": "ProvidersPractices",
             "fields": {
                 "id": {
                     "name": "id",
@@ -760,32 +917,30 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Provider": {
-                    "name": "Provider",
+                "providers": {
+                    "name": "providers",
                     "isArray": false,
                     "type": {
-                        "model": "ProviderInsurances"
+                        "model": "Providers"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "providerPracticesProviderId"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "providersID"
                     }
                 },
-                "Practice": {
-                    "name": "Practice",
+                "practices": {
+                    "name": "practices",
                     "isArray": false,
                     "type": {
                         "model": "Practices"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "providerPracticesPracticeId"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "practicesID"
                     }
                 },
                 "createdAt": {
@@ -803,171 +958,30 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "providerPracticesProviderId": {
-                    "name": "providerPracticesProviderId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "providerPracticesPracticeId": {
-                    "name": "providerPracticesPracticeId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "ProviderPractices",
+            "pluralName": "ProvidersPractices",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "auth",
+                    "type": "key",
                     "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
+                        "name": "byProviders",
+                        "fields": [
+                            "providersID"
                         ]
                     }
-                }
-            ]
-        },
-        "Practices": {
-            "name": "Practices",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Market": {
-                    "name": "Market",
-                    "isArray": false,
-                    "type": {
-                        "model": "Markets"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "practicesMarketId"
-                    }
-                },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "county": {
-                    "name": "county",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "website": {
-                    "name": "website",
-                    "isArray": false,
-                    "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "phone_number": {
-                    "name": "phone_number",
-                    "isArray": false,
-                    "type": "AWSPhone",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "fax": {
-                    "name": "fax",
-                    "isArray": false,
-                    "type": "AWSPhone",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "nearby_landmarks": {
-                    "name": "nearby_landmarks",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "humana_pcp_number": {
-                    "name": "humana_pcp_number",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "practicesMarketId": {
-                    "name": "practicesMarketId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "Practices",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
                 },
                 {
-                    "type": "auth",
+                    "type": "key",
                     "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
+                        "name": "byPractices",
+                        "fields": [
+                            "practicesID"
                         ]
                     }
                 }
@@ -983,19 +997,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "insurances": {
-                    "name": "insurances",
-                    "isArray": false,
-                    "type": {
-                        "model": "Insurances"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "insurancesID"
-                    }
-                },
                 "markets": {
                     "name": "markets",
                     "isArray": false,
@@ -1007,6 +1008,19 @@ export const schema = {
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetName": "marketsID"
+                    }
+                },
+                "insurances": {
+                    "name": "insurances",
+                    "isArray": false,
+                    "type": {
+                        "model": "Insurances"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "insurancesID"
                     }
                 },
                 "createdAt": {
@@ -1036,18 +1050,18 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byInsurances",
+                        "name": "byMarkets",
                         "fields": [
-                            "insurancesID"
+                            "marketsID"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byMarkets",
+                        "name": "byInsurances",
                         "fields": [
-                            "marketsID"
+                            "insurancesID"
                         ]
                     }
                 }
@@ -1056,5 +1070,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "2e2da67a9701e6d7d2eab3036b0954e5"
+    "version": "93e29a2f6eef583e3b22a91306b1bd65"
 };

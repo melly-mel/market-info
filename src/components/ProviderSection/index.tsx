@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
-import { DataStoreService } from '../../services/index';
-import { Providers } from '../../models';
-import { Dropdown } from '../base/Dropdown';
 import { Flex, TextField, View } from '@aws-amplify/ui-react';
+import { setSelectedId } from '../base/actions';
+import { Dropdown } from '../base/Dropdown';
+import { useProviderReducer } from './hooks';
 
-export const ProviderSection = () => {
-    const [providers, setProviders] = useState([]);
-    const [provider, setProvider] = useState(null);
-    useEffect(() => {
-        async function fetchMarkets() {
-            const providers = await DataStoreService.getAll(Providers);
-            setProviders(providers);
-        }
-        fetchMarkets();
-    }, []);
+interface ProviderSectionProps {
+    selectedPractice: string;
+}
+
+export const ProviderSection: React.VFC<ProviderSectionProps> = ({selectedPractice: selectedPracticeId}) => {
+    const [providers, dispatchProviderAction] = useProviderReducer(selectedPracticeId);
     return (
         <View>
-            <Dropdown label='Provider' placeHolder='Select a provider' selections={providers} valueKey='first_name' displayKey='first_name' />
+            <Dropdown
+                label='Provider'
+                placeHolder='Select a provider'
+                selections={providers.items}
+                valueKey='id'
+                displayKey='first_name'
+                value={providers.selectedId}
+                onChange={(e) => setSelectedId(dispatchProviderAction, e.target.value)}/>
             <Flex>
                 <TextField label="Credential" value={"N/A"} isDisabled/>
                 <TextField label="Languages Spoken" value={"N/A"} isDisabled/>

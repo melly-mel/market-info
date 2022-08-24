@@ -1,64 +1,30 @@
-import { useEffect, useReducer, useState } from 'react';
-import { DataStoreService } from '../../services/index';
-import { InsurancePlans, InsurancesMarkets, Markets } from '../../models';
 import { Dropdown } from '../base/Dropdown';
 import { Collection, Flex, View, Text } from '@aws-amplify/ui-react';
-import { initialMarketState, marketReducer, intialInsuranceState, insuranceReducer } from './reducer';
-import { loadInsurances, loadMarkets, setSelectedId } from './actions';
+import { setSelectedId } from '../base/actions';
+import { MarketState } from './reducer';
+import { useInsuranceReducer, usePlanState } from './hooks';
 
-export const InsuranceSection = () => {
-    const [marketState, dispatchMarketAction] = useReducer(marketReducer, initialMarketState);
-    const [insuranceState, dispatchInsuranceAction] = useReducer(insuranceReducer, intialInsuranceState);
-    const [plans, setPlans] = useState([]);
-    const resetForm = () => {
-        loadInsurances(dispatchInsuranceAction, []);
-        setPlans([]);
-    }
-    useEffect(() => {
-        async function fetchMarkets() {
-            const markets = await DataStoreService.getAll(Markets);
-            loadMarkets(dispatchMarketAction, markets);
-        }
-        fetchMarkets();
-    }, []);
-    useEffect(() => {
-        async function fetchInsurances() {
-            if (marketState.selectedId) {
-                const insurMarkets = await DataStoreService.query(InsurancesMarkets);
-                const insurances = insurMarkets
-                    .filter((insurMarket) => insurMarket.markets.id === marketState.selectedId)
-                    .map((insurMarket) => insurMarket.insurances);
-                loadInsurances(dispatchInsuranceAction, insurances);
-            } else {
-                loadInsurances(dispatchInsuranceAction, []);
-            }
-        }
-        fetchInsurances();
-    }, [marketState.selectedId]);
-    useEffect(() => {
-        async function fetchInsurancePlans() {
-            if (insuranceState.selectedId){
-                const plans = await DataStoreService.query(InsurancePlans, insurancePlan => insurancePlan.insurancesID('eq', insuranceState.selectedId));
-                setPlans(plans);
-            } else {
-                setPlans([]);
-            }
-        }
-        fetchInsurancePlans();
-    }, [insuranceState.selectedId]);
+interface InsuranceSectionProps {
+    markets: MarketState;
+    onMarketChange: (marketId: string) => void;
+};
+
+export const InsuranceSection: React.VFC<InsuranceSectionProps> = ({
+    markets,
+    onMarketChange,
+}) => {
+    const [insuranceState, dispatchInsuranceAction] = useInsuranceReducer(markets.selectedId);
+    const [plans] = usePlanState(insuranceState.selectedId);
     return (
         <Flex>
             <Dropdown
                 label='Market'
                 placeHolder='Select a market'
-                selections={marketState.items}
+                selections={markets.items}
                 valueKey='id'
                 displayKey='state'
-                value={marketState.selectedId}
-                onChange={(e) => {
-                    resetForm();
-                    setSelectedId(dispatchMarketAction, e.target.value)} 
-                } />
+                value={markets.selectedId}
+                onChange={(e) => onMarketChange(e.target.value)} />
             <Dropdown
                 label='Insurance Provider'
                 placeHolder='Select an insurance'
