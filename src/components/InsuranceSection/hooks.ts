@@ -8,12 +8,8 @@ export const useMarketReducer: () => [MarketState, React.Dispatch<MarketAction>]
     const [marketState, dispatchMarketAction] = useReducer(marketReducer, initialMarketState);
     useEffect(() => {
         async function fetchMarkets() {
-            try {
-                const markets = await DataStoreService.getAll(Markets);
-                loadItems(dispatchMarketAction, markets);
-            } catch (e) {
-                console.error(e)
-            }
+            const markets = await DataStoreService.getAll(Markets);
+            loadItems(dispatchMarketAction, markets);
         }
         fetchMarkets();
     }, []);
