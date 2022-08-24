@@ -28,7 +28,7 @@ type ProviderInsurances @model @auth(rules: [{allow: public}]) {
 
 type ProviderPractices @model @auth(rules: [{allow: public}]) {
   id: ID!
-  Provider: ProviderInsurances @hasOne
+  Provider: Providers @hasOne
   Practice: Practices @hasOne
 }
 
@@ -55,6 +55,7 @@ type Providers @model @auth(rules: [{allow: public}]) {
   Credential: Credentials @hasOne
   ProviderType: ProviderTypes @hasOne
   Gender: Genders @hasOne
+  Practices: [Practices] @manyToMany(relationName: "ProvidersPractices")
 }
 
 type Practices @model @auth(rules: [{allow: public}]) {
@@ -68,6 +69,7 @@ type Practices @model @auth(rules: [{allow: public}]) {
   fax: AWSPhone
   nearby_landmarks: String
   humana_pcp_number: Int
+  providerss: [Providers] @manyToMany(relationName: "ProvidersPractices")
 }
 
 type Markets @model @auth(rules: [{allow: public}]) {

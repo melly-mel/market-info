@@ -28,11 +28,15 @@ type GendersMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type InsurancesMetaData = {
+type PracticesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type MarketsMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type InsurancesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -44,7 +48,7 @@ type ProviderPracticesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type PracticesMetaData = {
+type ProvidersPracticesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -84,6 +88,7 @@ export declare class Providers {
   readonly Credential?: Credentials | null;
   readonly ProviderType?: ProviderTypes | null;
   readonly Gender?: Genders | null;
+  readonly Practices?: (ProvidersPractices | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly providersCredentialId?: string | null;
@@ -120,15 +125,23 @@ export declare class Genders {
   static copyOf(source: Genders, mutator: (draft: MutableModel<Genders, GendersMetaData>) => MutableModel<Genders, GendersMetaData> | void): Genders;
 }
 
-export declare class Insurances {
+export declare class Practices {
   readonly id: string;
   readonly name?: string | null;
-  readonly InsurancePlan?: (InsurancePlans | null)[] | null;
-  readonly Markets?: (InsurancesMarkets | null)[] | null;
+  readonly Market?: Markets | null;
+  readonly address?: string | null;
+  readonly county?: string | null;
+  readonly website?: string | null;
+  readonly phone_number?: string | null;
+  readonly fax?: string | null;
+  readonly nearby_landmarks?: string | null;
+  readonly humana_pcp_number?: number | null;
+  readonly providerss?: (ProvidersPractices | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<Insurances, InsurancesMetaData>);
-  static copyOf(source: Insurances, mutator: (draft: MutableModel<Insurances, InsurancesMetaData>) => MutableModel<Insurances, InsurancesMetaData> | void): Insurances;
+  readonly practicesMarketId?: string | null;
+  constructor(init: ModelInit<Practices, PracticesMetaData>);
+  static copyOf(source: Practices, mutator: (draft: MutableModel<Practices, PracticesMetaData>) => MutableModel<Practices, PracticesMetaData> | void): Practices;
 }
 
 export declare class Markets {
@@ -140,6 +153,17 @@ export declare class Markets {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Markets, MarketsMetaData>);
   static copyOf(source: Markets, mutator: (draft: MutableModel<Markets, MarketsMetaData>) => MutableModel<Markets, MarketsMetaData> | void): Markets;
+}
+
+export declare class Insurances {
+  readonly id: string;
+  readonly name?: string | null;
+  readonly InsurancePlan?: (InsurancePlans | null)[] | null;
+  readonly Markets?: (InsurancesMarkets | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Insurances, InsurancesMetaData>);
+  static copyOf(source: Insurances, mutator: (draft: MutableModel<Insurances, InsurancesMetaData>) => MutableModel<Insurances, InsurancesMetaData> | void): Insurances;
 }
 
 export declare class ProviderInsurances {
@@ -156,7 +180,7 @@ export declare class ProviderInsurances {
 
 export declare class ProviderPractices {
   readonly id: string;
-  readonly Provider?: ProviderInsurances | null;
+  readonly Provider?: Providers | null;
   readonly Practice?: Practices | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -166,28 +190,20 @@ export declare class ProviderPractices {
   static copyOf(source: ProviderPractices, mutator: (draft: MutableModel<ProviderPractices, ProviderPracticesMetaData>) => MutableModel<ProviderPractices, ProviderPracticesMetaData> | void): ProviderPractices;
 }
 
-export declare class Practices {
+export declare class ProvidersPractices {
   readonly id: string;
-  readonly name?: string | null;
-  readonly Market?: Markets | null;
-  readonly address?: string | null;
-  readonly county?: string | null;
-  readonly website?: string | null;
-  readonly phone_number?: string | null;
-  readonly fax?: string | null;
-  readonly nearby_landmarks?: string | null;
-  readonly humana_pcp_number?: number | null;
+  readonly providers: Providers;
+  readonly practices: Practices;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly practicesMarketId?: string | null;
-  constructor(init: ModelInit<Practices, PracticesMetaData>);
-  static copyOf(source: Practices, mutator: (draft: MutableModel<Practices, PracticesMetaData>) => MutableModel<Practices, PracticesMetaData> | void): Practices;
+  constructor(init: ModelInit<ProvidersPractices, ProvidersPracticesMetaData>);
+  static copyOf(source: ProvidersPractices, mutator: (draft: MutableModel<ProvidersPractices, ProvidersPracticesMetaData>) => MutableModel<ProvidersPractices, ProvidersPracticesMetaData> | void): ProvidersPractices;
 }
 
 export declare class InsurancesMarkets {
   readonly id: string;
-  readonly insurances: Insurances;
   readonly markets: Markets;
+  readonly insurances: Insurances;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<InsurancesMarkets, InsurancesMarketsMetaData>);
