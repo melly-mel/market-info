@@ -907,100 +907,6 @@ export const schema = {
                 }
             ]
         },
-        "ProviderPractices": {
-            "name": "ProviderPractices",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "Provider": {
-                    "name": "Provider",
-                    "isArray": false,
-                    "type": {
-                        "model": "Providers"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "providerPracticesProviderId"
-                    }
-                },
-                "Practice": {
-                    "name": "Practice",
-                    "isArray": false,
-                    "type": {
-                        "model": "Practices"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "providerPracticesPracticeId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "providerPracticesProviderId": {
-                    "name": "providerPracticesProviderId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "providerPracticesPracticeId": {
-                    "name": "providerPracticesPracticeId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "ProviderPractices",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "ProvidersPractices": {
             "name": "ProvidersPractices",
             "fields": {
@@ -1164,5 +1070,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "713e8ed81844206b5025acc993a108a0"
+    "version": "93e29a2f6eef583e3b22a91306b1bd65"
 };

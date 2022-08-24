@@ -26,12 +26,6 @@ type ProviderInsurances @model @auth(rules: [{allow: public}]) {
   Insurance: Insurances @hasOne
 }
 
-type ProviderPractices @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  Provider: Providers @hasOne
-  Practice: Practices @hasOne
-}
-
 type ProviderTypes @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String

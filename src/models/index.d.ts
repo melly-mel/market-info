@@ -44,10 +44,6 @@ type ProviderInsurancesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type ProviderPracticesMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 type ProvidersPracticesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -176,18 +172,6 @@ export declare class ProviderInsurances {
   readonly providerInsurancesInsuranceId?: string | null;
   constructor(init: ModelInit<ProviderInsurances, ProviderInsurancesMetaData>);
   static copyOf(source: ProviderInsurances, mutator: (draft: MutableModel<ProviderInsurances, ProviderInsurancesMetaData>) => MutableModel<ProviderInsurances, ProviderInsurancesMetaData> | void): ProviderInsurances;
-}
-
-export declare class ProviderPractices {
-  readonly id: string;
-  readonly Provider?: Providers | null;
-  readonly Practice?: Practices | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly providerPracticesProviderId?: string | null;
-  readonly providerPracticesPracticeId?: string | null;
-  constructor(init: ModelInit<ProviderPractices, ProviderPracticesMetaData>);
-  static copyOf(source: ProviderPractices, mutator: (draft: MutableModel<ProviderPractices, ProviderPracticesMetaData>) => MutableModel<ProviderPractices, ProviderPracticesMetaData> | void): ProviderPractices;
 }
 
 export declare class ProvidersPractices {
